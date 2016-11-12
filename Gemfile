@@ -4,6 +4,7 @@ group :development, :test do
   gem 'rake', '< 10.5.0',       :require => false
   gem 'tins', '< 1.6.0',        :require => false
   gem 'mime-types', '< 2.99',   :require => false
+  gem 'json', '< 1.8.3',        :require => false
   gem 'rspec', '< 3.0.0',       :require => false
   gem 'rspec-puppet',           :require => false, :git => 'https://github.com/rodjek/rspec-puppet.git'
   gem 'puppetlabs_spec_helper', '~> 0.4.0', :require => false
