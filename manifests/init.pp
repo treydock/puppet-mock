@@ -21,10 +21,10 @@ class mock (
 
   if $manage_group {
     group { 'mock':
-      ensure  => $ensure,
-      name    => $group_name,
-      gid     => $group_gid,
-      before  => Package['mock'],
+      ensure => $ensure,
+      name   => $group_name,
+      gid    => $group_gid,
+      before => Package['mock'],
     }
   }
 
