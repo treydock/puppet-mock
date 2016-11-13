@@ -1,7 +1,12 @@
 require 'spec_helper'
 
 describe 'mock' do
-  let(:facts) {{ :osfamily => 'RedHat' }}
+  let(:facts) do
+    { 
+      :osfamily => 'RedHat', 
+      :puppetversion => Puppet.version, 
+    }
+  end
 
   let(:params) {{}}
 

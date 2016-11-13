@@ -30,5 +30,7 @@ matrix:
   exclude:
     - rvm: 2.0.0
       env: PUPPET_GEM_VERSION="~> 3.1.0"
+    - rvm: 1.8.7
+      env: PUPPET_GEM_VERSION="~> 4.0.0"
 notifications:
   email: false
