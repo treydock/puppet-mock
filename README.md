@@ -53,6 +53,10 @@ Sets the `ensure` parameter for the classes' managed resources (defaults to `'pr
 
 Boolean that determines if the group resource is managed by this module (defaults to `true`).
 
+#####`manage_epel`
+
+Boolean that determines if the epel module is included by this module (defaults to `true`).
+
 #####`group_gid`
 
 Sets the mock group's GID (defaults to `'135'`).
