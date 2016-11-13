@@ -5,6 +5,7 @@
 class mock (
   $ensure = 'present',
   $manage_group = true,
+  $manage_epel = true,
   $group_gid = '135',
   $group_name = $mock::params::group_name,
   $package_name = $mock::params::package_name,
@@ -12,15 +13,18 @@ class mock (
 
   validate_re($ensure, [ '^present', '^absent' ])
   validate_bool($manage_group)
+  validate_bool($manage_epel)
 
-  include epel
+  if $manage_epel {
+    include epel
+  }
 
   if $manage_group {
     group { 'mock':
-      ensure  => $ensure,
-      name    => $group_name,
-      gid     => $group_gid,
-      before  => Package['mock'],
+      ensure => $ensure,
+      name   => $group_name,
+      gid    => $group_gid,
+      before => Package['mock'],
     }
   }
 
