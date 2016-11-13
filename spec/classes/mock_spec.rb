@@ -66,6 +66,7 @@ describe 'mock' do
   # Test verify_boolean parameters
   [
     'manage_group',
+    'manage_epel',
   ].each do |param|
     context "with #{param} => 'foo'" do
       let(:params) {{ param.to_sym => 'foo' }}
