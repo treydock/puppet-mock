@@ -4,6 +4,14 @@ Release notes for the treydock-mock module.
 
 ------------------------------------------
 
+#### 0.1.0 - 2016-11-28
+
+* Add `manage_epel` parameter
+* Switch from Modulefile to metadata.json
+* Updated development dependencies
+
+------------------------------------------
+
 #### 0.0.2 - 2014-06-18
 
 * Update development dependencies
