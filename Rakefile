@@ -4,6 +4,9 @@ require 'puppet-syntax/tasks/puppet-syntax'
 
 PuppetLint.configuration.send("disable_80chars")
 PuppetLint.configuration.send('disable_quoted_booleans')
+#module autoload format always fails when module directory is in 'username-modulename' format
+#disabling so that automatic test can pass
+PuppetLint.configuration.send('disable_autoloader_layout')
 PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
 PuppetLint.configuration.fail_on_warnings = true
 
