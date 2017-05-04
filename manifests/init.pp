@@ -17,6 +17,7 @@ class mock (
 
   if $manage_epel {
     include epel
+    Package['mock'] -> Yumrepo['epel']
   }
 
   if $manage_group {
@@ -31,7 +32,6 @@ class mock (
   package { 'mock':
     ensure  => $ensure,
     name    => $package_name,
-    require => Yumrepo['epel'],
   }
 
 }
