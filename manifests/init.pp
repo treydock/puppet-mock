@@ -7,6 +7,7 @@ class mock (
   Boolean $manage_group = true,
   Boolean $manage_epel = true,
   Integer $group_gid = 135,
+  Optional[Array] $group_members = undef,
   String $group_name = $mock::params::group_name,
   String $package_name = $mock::params::package_name,
 ) inherits mock::params {
@@ -18,10 +19,12 @@ class mock (
 
   if $manage_group {
     group { 'mock':
-      ensure => $ensure,
-      name   => $group_name,
-      gid    => $group_gid,
-      before => Package['mock'],
+      ensure     => $ensure,
+      name       => $group_name,
+      gid        => $group_gid,
+      forcelocal => true,
+      members    => $group_members,
+      before     => Package['mock'],
     }
   }
 

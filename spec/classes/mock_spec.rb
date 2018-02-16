@@ -26,6 +26,11 @@ describe 'mock' do
         })
       end
 
+      context 'group_members defined' do
+        let(:params) {{ :group_members => ['foo', 'bar'] }}
+        it { should contain_group('mock').with_members(['foo', 'bar']) }
+      end
+
       context 'ensure => absent' do
         let(:params) {{ :ensure => 'absent' }}
         it { should contain_group('mock').with_ensure('absent') }

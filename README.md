@@ -30,6 +30,11 @@ Define the class with default parameters.
 
     class { 'mock': }
 
+Add users to mock group
+
+    class { 'mock':
+      group_members => ['user1', 'user2'],
+    }
 
 Disable management of the mock group.
 
