@@ -1,27 +1,34 @@
 source "http://rubygems.org"
 
 group :development, :test do
-  gem 'puppetlabs_spec_helper', '>= 1.2.0'
-  gem 'facter', '>= 1.7.0'
-  gem 'rspec-puppet'
-  gem 'puppet-lint', '~> 2.0'
-
-  gem 'rspec',     '~> 2.0'   if RUBY_VERSION >= '1.8.7' and RUBY_VERSION < '1.9'
-  gem 'rake',      '~> 10.0'  if RUBY_VERSION >= '1.8.7' and RUBY_VERSION < '1.9'
-  gem 'json',      '<= 1.8'   if RUBY_VERSION < '2.0.0'
-  gem 'json_pure', '<= 2.0.1' if RUBY_VERSION < '2.0.0'
-  gem 'metadata-json-lint', '0.0.11'   if RUBY_VERSION < '1.9'
-  gem 'metadata-json-lint' if RUBY_VERSION >= '1.9'
+  if RUBY_VERSION.start_with? '1.8'
+    gem 'rake', '< 11',           :require => false
+  else
+    gem 'rake', '< 12',           :require => false
+  end
+  gem 'rspec', '~>3.1.0',         :require => false
+  gem 'rspec-puppet', '~>2.x',    :require => false
+  gem 'rspec-puppet-facts',       :require => false
+  gem 'puppetlabs_spec_helper',   :require => false
+  gem 'puppet-lint',              :require => false
+  gem 'metadata-json-lint',       :require => false
+  gem 'puppet-syntax',            :require => false
+  gem 'simplecov',                :require => false
+  gem 'json_pure', '~>1.x',       :require => false
 end
 
-group :development do
-  gem 'beaker-rspec',           :require => false
-  gem 'vagrant-wrapper',        :require => false
-  gem 'docker-api',             :require => false
+group :system_tests do
+  gem 'beaker',                       :require => false
+  gem 'beaker-rspec',                 :require => false
+  gem 'serverspec',                   :require => false
+  gem 'beaker-puppet_install_helper', :require => false
+  gem 'beaker-module_install_helper', :require => false
 end
 
-if puppetversion = ENV['PUPPET_GEM_VERSION']
-  gem 'puppet', puppetversion, :require => false
+if facterversion = ENV['FACTER_GEM_VERSION']
+  gem 'facter', facterversion, :require => false
 else
-  gem 'puppet', '~> 3.5.0', :require => false
+  gem 'facter', :require => false
 end
+
+gem 'puppet', ENV['PUPPET_GEM_VERSION'] || '~> 5.x', :require => false

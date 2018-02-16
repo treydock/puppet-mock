@@ -3,21 +3,17 @@
 # See README.md for more details.
 #
 class mock (
-  $ensure = 'present',
-  $manage_group = true,
-  $manage_epel = true,
-  $group_gid = '135',
-  $group_name = $mock::params::group_name,
-  $package_name = $mock::params::package_name,
+  Enum['present', 'absent'] $ensure = 'present',
+  Boolean $manage_group = true,
+  Boolean $manage_epel = true,
+  Integer $group_gid = 135,
+  String $group_name = $mock::params::group_name,
+  String $package_name = $mock::params::package_name,
 ) inherits mock::params {
-
-  validate_re($ensure, [ '^present', '^absent' ])
-  validate_bool($manage_group)
-  validate_bool($manage_epel)
 
   if $manage_epel {
     include epel
-    Package['mock'] -> Yumrepo['epel']
+    Class['epel'] -> Package['mock']
   }
 
   if $manage_group {
@@ -30,8 +26,8 @@ class mock (
   }
 
   package { 'mock':
-    ensure  => $ensure,
-    name    => $package_name,
+    ensure => $ensure,
+    name   => $package_name,
   }
 
 }

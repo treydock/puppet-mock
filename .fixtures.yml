@@ -1,10 +1,9 @@
 fixtures:
   repositories:
     stdlib:
-      repo: git://github.com/puppetlabs/puppetlabs-stdlib.git
-      ref: 4.1.0
+      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+      ref: 4.13.1
     epel:
-      repo: git://github.com/stahnma/puppet-module-epel.git
-      ref: 0.0.6
+      repo: https://github.com/stahnma/puppet-module-epel.git
   symlinks:
     mock: "#{source_dir}"

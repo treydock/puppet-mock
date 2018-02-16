@@ -2,19 +2,9 @@ require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
 
-PuppetLint.configuration.send("disable_80chars")
-PuppetLint.configuration.send('disable_quoted_booleans')
-#module autoload format always fails when module directory is in 'username-modulename' format
-#disabling so that automatic test can pass
-PuppetLint.configuration.send('disable_autoloader_layout')
-PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
-PuppetLint.configuration.fail_on_warnings = true
-
-# Forsake support for Puppet 2.6.2 for the benefit of cleaner code.
-# http://puppet-lint.com/checks/class_parameter_defaults/
-PuppetLint.configuration.send('disable_class_parameter_defaults')
-# http://puppet-lint.com/checks/class_inherits_from_params_class/
-PuppetLint.configuration.send('disable_class_inherits_from_params_class')
+task :default do
+  sh %{rake -T}
+end
 
 exclude_paths = [
   "pkg/**/*",
@@ -22,13 +12,17 @@ exclude_paths = [
   "spec/**/*",
 ]
 
-PuppetLint.configuration.ignore_paths = exclude_paths
-PuppetSyntax.exclude_paths = exclude_paths
-
-desc "Run acceptance tests"
-RSpec::Core::RakeTask.new(:acceptance) do |t|
-  t.pattern = 'spec/acceptance'
+Rake::Task[:lint].clear
+PuppetLint::RakeTask.new :lint do |config|
+  config.ignore_paths = exclude_paths
+  config.fail_on_warnings = true
+  config.log_format = "%{path}:%{line}:%{check}:%{KIND}:%{message}"
+  config.disable_checks = ['140chars', 'class_inherits_from_params_class']
+  #config.relative = true
 end
+PuppetLint.configuration.relative = true
+
+PuppetSyntax.exclude_paths = exclude_paths
 
 desc "Run syntax, lint, and spec tests."
 task :test => [
