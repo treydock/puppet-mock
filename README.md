@@ -1,8 +1,9 @@
 # puppet-mock
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/mock.svg)](https://forge.puppetlabs.com/treydock/mock)
 [![Build Status](https://travis-ci.org/treydock/puppet-mock.png)](https://travis-ci.org/treydock/puppet-mock)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview - What is the mock module?](#overview)
 2. [Usage - Configuration and customization options](#usage)
@@ -45,37 +46,37 @@ To remove the mock group and the mock package
 
 #### Parameters for `mock` class
 
-#####`ensure`
+##### `ensure`
 
 Sets the `ensure` parameter for the classes' managed resources (defaults to `'present'`).
 
-#####`manage_group`
+##### `manage_group`
 
 Boolean that determines if the group resource is managed by this module (defaults to `true`).
 
-#####`manage_epel`
+##### `manage_epel`
 
 Boolean that determines if the epel module is included by this module (defaults to `true`).
 
-#####`group_gid`
+##### `group_gid`
 
 Sets the mock group's GID (defaults to `'135'`).
 
-#####`group_name`
+##### `group_name`
 
 Name of the mock group (defaults to 'mock').
 
-#####`package_name`
+##### `package_name`
 
 Name of the mock package (defaults to 'mock').
 
 ## Limitations
 
-This module has been built on and tested against Puppet 2.7 and higher.
+This module has been built on and tested against Puppet 4.7 and higher.
 
 This module has been tested on:
 
-* CentOS 5/6
+* CentOS 6/7
 
 ## Development
 
