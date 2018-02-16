@@ -4,6 +4,14 @@ Release notes for the treydock-mock module.
 
 ------------------------------------------
 
+#### 1.0.0 - 2018-02-16
+
+* Drop support for Puppet 3, require Puppet >= 4.7.0
+* Drop support for EL5
+* Manage mock group members
+
+------------------------------------------
+
 #### 0.1.0 - 2016-11-28
 
 * Add `manage_epel` parameter
