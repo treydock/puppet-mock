@@ -1,7 +1,6 @@
 HOSTS:
   centos-6-x64:
     roles:
-      - master
       - agent
     platform: el-6-x86_64
     hypervisor: docker
@@ -11,7 +10,7 @@ HOSTS:
       - '/sbin/init'
     docker_image_commands:
       - 'yum install -y tar wget cronie git'
-    docker_container_name: 'nfs'
+    docker_container_name: 'mock-el6'
 CONFIG:
   log_level: debug
   type: foss

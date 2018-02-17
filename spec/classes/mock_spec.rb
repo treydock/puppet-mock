@@ -28,7 +28,22 @@ describe 'mock' do
 
       context 'group_members defined' do
         let(:params) {{ :group_members => ['foo', 'bar'] }}
-        it { should contain_group('mock').with_members(['foo', 'bar']) }
+        it do
+          should contain_exec('add-foo-to-group-mock').with({
+            :path    => '/usr/bin:/bin:/usr/sbin:/sbin',
+            :command => "usermod -a -G mock foo",
+            :unless  => "egrep '^mock:' /etc/group | cut -d: -f4 | tr ',' '\\n' | egrep -q '^foo$'",
+            :require => 'Group[mock]',
+          })
+        end
+        it do
+          should contain_exec('add-bar-to-group-mock').with({
+            :path    => '/usr/bin:/bin:/usr/sbin:/sbin',
+            :command => "usermod -a -G mock bar",
+            :unless  => "egrep '^mock:' /etc/group | cut -d: -f4 | tr ',' '\\n' | egrep -q '^bar$'",
+            :require => 'Group[mock]',
+          })
+        end
       end
 
       context 'ensure => absent' do

@@ -21,6 +21,27 @@ describe 'mock class:' do
     end
   end
 
+  context 'group_members defined' do
+    it 'should add users to mock group' do
+      pp =<<-EOS
+        class { 'mock':
+          group_members => ['daemon','adm']
+        }
+      EOS
+
+      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, :catch_changes => true)
+    end
+
+    describe user('daemon') do
+      it { should belong_to_group 'mock' }
+    end
+
+    describe user('adm') do
+      it { should belong_to_group 'mock' }
+    end
+  end
+
   context 'ensure => absent:' do
     it 'should run successfully' do
       pp =<<-EOS

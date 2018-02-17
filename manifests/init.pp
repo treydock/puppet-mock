@@ -7,7 +7,7 @@ class mock (
   Boolean $manage_group = true,
   Boolean $manage_epel = true,
   Integer $group_gid = 135,
-  Optional[Array] $group_members = undef,
+  Array $group_members = [],
   String $group_name = $mock::params::group_name,
   String $package_name = $mock::params::package_name,
 ) inherits mock::params {
@@ -23,8 +23,19 @@ class mock (
       name       => $group_name,
       gid        => $group_gid,
       forcelocal => true,
-      members    => $group_members,
       before     => Package['mock'],
+    }
+    $group_member_require = Group['mock']
+  } else {
+    $group_member_require = undef
+  }
+
+  $group_members.each |$m| {
+    exec { "add-${m}-to-group-${group_name}":
+      path    => '/usr/bin:/bin:/usr/sbin:/sbin',
+      command => "usermod -a -G ${group_name} ${m}",
+      unless  => "egrep '^${group_name}:' /etc/group | cut -d: -f4 | tr ',' '\\n' | egrep -q '^${m}$'",
+      require => $group_member_require,
     }
   }
 

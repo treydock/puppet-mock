@@ -71,6 +71,10 @@ Sets the mock group's GID (defaults to `'135'`).
 
 Name of the mock group (defaults to 'mock').
 
+##### `group_members`
+
+Array of users who should be added to mock group (defaults to empty array)
+
 ##### `package_name`
 
 Name of the mock package (defaults to 'mock').
