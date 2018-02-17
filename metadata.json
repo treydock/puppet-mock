@@ -1,6 +1,6 @@
 {
   "name": "treydock-mock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "treydock",
   "summary": "mock Puppet module",
   "license": "Apache-2.0",

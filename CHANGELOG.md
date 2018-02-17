@@ -4,6 +4,12 @@ Release notes for the treydock-mock module.
 
 ------------------------------------------
 
+#### 1.0.1 - 2018-02-17
+
+* Fix `group_members` to actually update the mock group membership
+
+------------------------------------------
+
 #### 1.0.0 - 2018-02-16
 
 * Drop support for Puppet 3, require Puppet >= 4.7.0
