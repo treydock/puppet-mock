@@ -30,13 +30,12 @@ class mock (
     $group_member_require = undef
   }
 
-  $group_members.each |$m| {
-    exec { "add-${m}-to-group-${group_name}":
-      path    => '/usr/bin:/bin:/usr/sbin:/sbin',
-      command => "usermod -a -G ${group_name} ${m}",
-      unless  => "egrep '^${group_name}:' /etc/group | cut -d: -f4 | tr ',' '\\n' | egrep -q '^${m}$'",
-      require => $group_member_require,
-    }
+  $_group_members = join(sort($group_members), ',')
+  exec { 'manage-mock-group-members':
+    path    => '/usr/bin:/bin:/usr/sbin:/sbin',
+    command => "lgroupmod -m `egrep '^mock:' /etc/group | cut -d: -f4` ${group_name} ; lgroupmod -M ${_group_members} ${group_name}",
+    unless  => "egrep '^${group_name}:' /etc/group | cut -d: -f4 | tr ',' '\\n' | sort | paste -sd, | egrep '^${_group_members}$'",
+    require => $group_member_require,
   }
 
   package { 'mock':
