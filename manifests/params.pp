@@ -1,5 +1,4 @@
-# == Class: mock::params
-#
+# @api private
 class mock::params {
 
   case $::osfamily {

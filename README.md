@@ -49,35 +49,9 @@ To remove the mock group and the mock package
       ensure  => 'absent',
     }
 
-#### Parameters for `mock` class
+## Reference
 
-##### `ensure`
-
-Sets the `ensure` parameter for the classes' managed resources (defaults to `'present'`).
-
-##### `manage_group`
-
-Boolean that determines if the group resource is managed by this module (defaults to `true`).
-
-##### `manage_epel`
-
-Boolean that determines if the epel module is included by this module (defaults to `true`).
-
-##### `group_gid`
-
-Sets the mock group's GID (defaults to `'135'`).
-
-##### `group_name`
-
-Name of the mock group (defaults to 'mock').
-
-##### `group_members`
-
-Array of users who should be added to mock group (defaults to empty array)
-
-##### `package_name`
-
-Name of the mock package (defaults to 'mock').
+[http://treydock.github.io/puppet-mock/](http://treydock.github.io/puppet-mock/)
 
 ## Limitations
 
@@ -106,7 +80,7 @@ Run unit tests
 
 If you have Vagrant >= 1.2.0 installed you can run acceptance tests
 
-    bundle exec rake acceptance
+    bundle exec rake beaker
 
 ## Further Information
 
