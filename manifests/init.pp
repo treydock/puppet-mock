@@ -1,6 +1,24 @@
-# == Class: mock
+# @summary Manage mock
 #
-# See README.md for more details.
+# @example Manage mock and define group members
+#   class { 'mock':
+#     group_members => ['user1', 'user2'],
+#   }
+#
+# @param ensure
+#   Sets the `ensure` parameter for the class' managed resources (defaults to `present`).
+# @param manage_group
+#   Boolean that determines if the group resource is managed by this module (defaults to `true`).
+# @param manage_epel
+#   Boolean that determines if the epel module is included by this module (defaults to `true`).
+# @param group_gid
+#   Sets the mock group's GID (defaults to `135`).
+# @param group_name
+#   Name of the mock group (defaults to `mock`).
+# @param group_members
+#   Array of users who should be added to mock group (defaults to empty array)
+# @param package_name
+#   Name of the mock package (defaults to `mock`).
 #
 class mock (
   Enum['present', 'absent'] $ensure = 'present',
